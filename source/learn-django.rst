@@ -12,6 +12,8 @@ Contents:
    :maxdepth: 2
 
    chapter01/README.rst
+   chapter02/README.rst
+
 
 Indices and tables
 ==================
