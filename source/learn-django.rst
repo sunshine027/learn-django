@@ -13,6 +13,7 @@ Contents:
 
    chapter01/README.rst
    chapter02/README.rst
+   chapter03/README.rst
 
 
 Indices and tables
