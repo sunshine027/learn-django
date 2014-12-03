@@ -6,7 +6,7 @@ How to pronounce ?
 .. figure:: http://en.wikipedia.org/wiki/Django_Reinhardt
    :alt: Django Reinhardt
 
-   Django Reinhardt
+Django Reinhardt
 https://docs.djangoproject.com/en/1.6/faq/general/#what-does-django-mean-and-how-do-you-pronounce-it
 
 From 2005
