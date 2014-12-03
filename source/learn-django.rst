@@ -11,7 +11,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   chapter01/README.rst
    chapter02/README.rst
    chapter03/README.rst
 
