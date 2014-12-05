@@ -1,8 +1,8 @@
-Getting Started
-===============
+Writing your first Django app, part 1
+=====================================
 
-Start project
--------------
+Creating a project
+------------------
 
 ::
 
@@ -19,15 +19,46 @@ Let’s look at what startproject created
         urls.py
         wsgi.py
 
-Create tables in the database
----------------------------------
+Database setup
+--------------
+
+1. set database:
+
+    Now, edit learningdjango/settings.py. It’s a normal Python module with module-level variables representing Django settings. By default, the configuration uses
+    SQLite. If you’re new to databases, or you’re just interested in trying Django, this is the easiest choice. SQLite is included in Python, so you won’t need to
+    install anything else to support your database
+
+    If you wish to use another database, install the appropriate database bindings, and change the following keys in the DATABASES 'default' item to match your database    connection settings:
+
+    ENGINE – Either 'django.db.backends.sqlite3', 'django.db.backends.postgresql_psycopg2', 'django.db.backends.mysql', or 'django.db.backends.oracle'. Other backends
+    are also available.
+    NAME – The name of your database. If you’re using SQLite, the database will be a file on your computer; in that case, NAME should be the full absolute path,
+    including filename, of that file. The default value, os.path.join(BASE_DIR, 'db.sqlite3'), will store the file in your project directory.
+    If you are not using SQLite as your database, additional settings such as USER, PASSWORD, HOST must be added. For more details, see the reference documentation
+    for DATABASES. For example, the following is configuration for mysql:
+
+::
+
+     DATABASES = {
+      'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'learning_django',
+         'USER': 'root',
+         'PASSWORD': '123456',
+         'HOST': 'localhost',
+     }
+    }
+
+2. Create the tables in the database before we can use them. To do that, run the following command:
 
 ::
 
   python manage.py migrate
 
-Run server
-----------
+The development server
+----------------------
+
+Let’s verify your Django project works:
 
 ::
 
@@ -38,19 +69,14 @@ Run server
 
     $ python manage.py runserver xxx.xxx.xxx.xx:8000
 
-Open a page
------------
-
-::
-
-    Open http://localhost:8000 in browser
+you can check that by openning http://localhost:8000 in browser
 
 Start an application
 --------------------
 
 ::
 
-    $ python manage.py startapp poll
+    $ python manage.py startapp polls
 
 That’ll create a directory polls, which is laid out like this:
 
@@ -105,7 +131,23 @@ Create Models
 
     $ python manage.py makemigrations polls
 
-2.3 Now, run migrate again to create those model tables in your database:
+You should see something similar to the following:
+
+::
+
+    Migrations for 'polls':
+    0001_initial.py:
+    - Create model Question
+    - Create model Choice
+    - Add field question to choice
+
+2.3 Let’s see what SQL that migration would run. The sqlmigrate command takes migration names and returns their SQL:
+
+::
+
+    $ python manage.py sqlmigrate polls 0001
+
+2.4 Now, run migrate again to create those model tables in your database:
 
 ::
 
@@ -117,25 +159,48 @@ Playing with the API
 ::
 
     $ python manage.py shell
+    >>> from polls.models import Question, Choice   # Import the model classes we just wrote.
+    # No questions are in the system yet.
+    >>> Question.objects.all()
+    []
 
+    # Create a new Question.
+    >>> from django.utils import timezone
+    >>> q = Question(question_text="What's new?", pub_date=timezone.now())
+
+    # Save the object into the database. You have to call save() explicitly.
+    >>> q.save()
+
+    # Now it has an ID. Note that this might say "1L" instead of "1", depending
+    # on which database you're using. That's no biggie; it just means your
+    # database backend prefers to return integers as Python long integer
+    # objects.
+    >>> q.id
+    1
+
+    # Access model field values via Python attributes.
+    >>> q.question_text
+    "What's new?"
+    >>> q.pub_date
+    datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
+
+    # Change values by changing the attributes, then calling save().
+    >>> q.question_text = "What's up?"
+    >>> q.save()
+
+    # objects.all() displays all the questions in the database.
+    >>> Question.objects.all()
+    [<Question: Question object>]
+
+Get help about manage.py
+
+::
     $ python manage.py help
 
 
 Project vs. application
+-----------------------
 
-MVC
-
--  Model: domain
--  View: presentation
--  Controller: interaction
-
-MTV
-
-Django considers the framework (itself) to be the controller
-
-https://docs.djangoproject.com/en/1.6/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names
-
--  Model: fat
--  Template: stupid
--  View: thin
-
+    What’s the difference between a project and an app? An app is a Web application that does something – e.g., a Weblog system, a database of public records
+    or a simple poll app. A project is a collection of configuration and apps for a particular Web site. A project can contain multiple apps. An app can be
+    in multiple projects.
