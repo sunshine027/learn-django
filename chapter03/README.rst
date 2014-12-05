@@ -84,7 +84,7 @@ Create Models
 
 2. Activating models
 
-   2.1 Edit the mysite/settings.py file again, and change the INSTALLED_APPS setting to include the string 'polls'. So it’ll look like this:
+2.1 Edit the mysite/settings.py file again, and change the INSTALLED_APPS setting to include the string 'polls'. So it’ll look like this:
 
 ::
 
@@ -99,13 +99,13 @@ Create Models
     )
 
 
- 2.2 Now Django knows to include the polls app. Let’s run another command:
+2.2 Now Django knows to include the polls app. Let’s run another command:
 
 ::
 
     $ python manage.py makemigrations polls
 
- 2.3 Now, run migrate again to create those model tables in your database:
+2.3 Now, run migrate again to create those model tables in your database:
 
 ::
 
