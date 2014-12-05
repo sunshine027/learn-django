@@ -195,6 +195,7 @@ Playing with the API
 Get help about manage.py
 
 ::
+
     $ python manage.py help
 
 
