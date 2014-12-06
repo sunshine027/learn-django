@@ -6,7 +6,7 @@ Write your first view
 
 1. In Django, web pages and other content are delivered by views. Each view is represented by a simple Python function (or method, in the case of class-based views). Django will choose a view by examining the URL that’s requested.
 
-Let’s write the first view. Open the file polls/views.py and put the following Python code in it:
+   Let’s write the first view. Open the file polls/views.py and put the following Python code in it:
 
 ::
 
@@ -67,7 +67,7 @@ Use the template system
         <p>No polls are available.</p>
     {% endif %}
 
-2. Update polls/view.py to make it like bellow:
+2. Update polls/view.py to use the template:
 
 ::
 
@@ -91,7 +91,7 @@ Note:
 
 3. A shotcut: render()
 
-It’s a very common idiom to load a template, fill a context and return an HttpResponse object with the result of the rendered template. Django provides a shortcut: render. So rewritten index view like:
+It’s a very common idiom to load a template, fill a context and return an HttpResponse object with the result of the rendered template. Django provides a shortcut: render. So we can simplify index view like:
 
 ::
 
@@ -121,18 +121,7 @@ Write more views
         question = get_object_or_404(Question, pk=question_id)
         return render(request, 'polls/detail.html', {'question': question})
 
-2. Wire the new views into the polls/urls.py module by adding the following url() calls:
-
-::
-
-    urlpatterns = patterns('',
-    # ex: /polls/
-    url(r'^$', views.index, name='index'),
-    # ex: /polls/5/
-    url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),
-    )
-
-3. Add the template polls/detail.html:
+2. Add the template polls/detail.html:
 
 ::
 
@@ -142,6 +131,17 @@ Write more views
             <li>{{ choice.choice_text }}</li>
         {% endfor %}
     </ul>
+
+3. Wire the new views into the polls/urls.py module by adding the following url() calls:
+
+::
+
+    urlpatterns = patterns('',
+    # ex: /polls/
+    url(r'^$', views.index, name='index'),
+    # ex: /polls/5/
+    url(r'^(?P<question_id>\d+)/$', views.detail, name='detail'),
+    )
 
 4. Open browser with: http://localhost:8000/polls/1/, you'll see the question. If 404 shows, that means there isn't any Question in your data. you can add by shell or by admin interface.
 
@@ -163,9 +163,10 @@ Note: here we use "{% url %}" template tag, this works by looking up the URL def
 the polls.urls module. You can see exactly where the URL name of ‘detail’ is defined below
 
 ::
+
     url(r'^(?P<question_id>\d+)/$', views.detail, name='detail')
 
-here we define a name "detail", we use this for reverse, and even later you change the url to other urls like "r'^specifics/(?P<question_id>\d+)/$", since the name doesn't change, you don't need to update the url in template.
+With name "detail" for reverse, and even later you change the url to other urls like "r'^specifics/(?P<question_id>\d+)/$", since the name doesn't change, you don't need to update the url in template.
 
 Summary
 -------
