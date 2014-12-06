@@ -2,13 +2,11 @@ Introduction
 ============
 
 How to pronounce ?
+------------------
 
-.. figure:: http://en.wikipedia.org/wiki/Django_Reinhardt
-   :alt: Django Reinhardt
+Django is named after Django Reinhardt, a gypsy jazz guitarist from the 1930s to early 1950s. To this day, he’s considered one of the best guitarists of all time.
 
-Django Reinhardt:
-
-  https://docs.djangoproject.com/en/1.6/faq/general/#what-does-django-mean-and-how-do-you-pronounce-it
+Django is pronounced JANG-oh. Rhymes with FANG-oh. The “D” is silent.
 
 Who use Django
 --------------
