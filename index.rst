@@ -17,7 +17,6 @@ Contents:
    chapter04/README.rst
    chapter05/README.rst
    chapter06/README.rst
-   chapter07/README.rst
 
 
 Indices and tables
