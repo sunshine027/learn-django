@@ -3,4 +3,4 @@ Model Introduction
 
 Model RelationShips
 -------------------
-.. include:: chapter07/README.rst
+.. include:: ../chapter07/README.rst
