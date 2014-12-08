@@ -1,6 +1,3 @@
-Model RelationShips
-===================
-
 ManyToOne
 ---------
 1. Model example with field **"models.ForeignKey"**:
