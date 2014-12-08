@@ -1,3 +1,6 @@
 Model Introduction
 ==================
-.. include:: ../chapter07/README.rst
+.. toctree::
+    :maxdepth: 2
+
+    chapter07/README.rst
